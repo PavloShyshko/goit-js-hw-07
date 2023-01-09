@@ -1,4 +1,5 @@
 import { galleryItems } from './gallery-items.js';
+
 // Change code below this line
 
 console.log(galleryItems);
@@ -23,10 +24,28 @@ galleryContainer.insertAdjacentHTML("beforeend", createMarkup);
 galleryContainer.addEventListener("click", onClickGalleryElement);
 
 function onClickGalleryElement(event) {
-    if (event.target.nodeName !== 'IMG') {
-        return;
+  if (event.target.nodeName !== 'IMG') {
+    return;
+  }
+
+  event.preventDefault();
+
+  const instance = basicLightbox.create(
+  `<img src="${event.target.dataset.source}" width="900" height="600">`,
+)
+
+instance.show() ;
+
+galleryContainer.addEventListener("keydown", (event) => {
+    if(event.code === "Escape"){
+        instance.close();
     }
-}
+})
+};
+
+
+
+
 
 
 
